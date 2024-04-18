@@ -2,7 +2,6 @@ package com.company.companymtservice.implementations;
 
 import com.company.companymtservice.constants.Constants;
 import com.company.companymtservice.entities.Domain;
-import com.company.companymtservice.exceptions.ResourceNotAvailable;
 import com.company.companymtservice.services.MTService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,17 +11,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class DomainServiceImpl  implements MTService {
 
-    private List<Domain> mtDomains;
+    @Getter
+    private List<Domain> mtDomains = new ArrayList<>();
 
     @Value("${mt.api.url}" + "${mt.api.domains.uri}")
     private String mtDomainUrl;
@@ -34,16 +35,16 @@ public class DomainServiceImpl  implements MTService {
      * Cron method to run on a predefined time set in Constants class
      */
     @Override
-    @Scheduled(cron = Constants.CRON_EVERY_MINUTE)
-    public void getMTParameters() {
+    @Scheduled(cron = Constants.CRON_DAILY_AT_MIDNIGHT)
+    public void updateMTParameters() {
         logger.info("Getting available domains from: " + mtDomainUrl);
         try {
             mtDomains = restTemplate.getForObject(mtDomainUrl, List.class);
-            logger.info("Domains received: " + mtDomains.toString());
-        } catch (ResourceNotAvailable e) {
+            logger.info("Domains received: " + mtDomains);
+        } catch (ResourceAccessException e) {
             logger.error("Resource: " + mtDomainUrl + " is not available.");
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error(e.getMessage());
         }
     }
 
@@ -53,6 +54,6 @@ public class DomainServiceImpl  implements MTService {
      */
     @Override
     public void run(String... args) {
-        getMTParameters();
+        updateMTParameters();
     }
 }

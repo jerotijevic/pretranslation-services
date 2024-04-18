@@ -2,7 +2,6 @@ package com.company.companymtservice.implementations;
 
 import com.company.companymtservice.constants.Constants;
 import com.company.companymtservice.entities.Language;
-import com.company.companymtservice.exceptions.ResourceNotAvailable;
 import com.company.companymtservice.services.MTService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,15 +14,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 public class LanguageServiceImpl implements MTService {
 
-    private List<Language> mtLanguageCodes;
+    @Getter
+    private List<Language> mtLanguageCodes = new ArrayList<>();
 
     @Value("${mt.api.url}" + "${mt.api.languages.uri}")
     private String mtLanguageUrl;
@@ -35,16 +35,16 @@ public class LanguageServiceImpl implements MTService {
      * Cron method to run on a predefined time set in Constants class.
      */
     @Override
-    @Scheduled(cron = Constants.CRON_EVERY_MINUTE)
-    public void getMTParameters() {
+    @Scheduled(cron = Constants.CRON_DAILY_AT_MIDNIGHT)
+    public void updateMTParameters() {
         logger.info("Getting language code list from: " + mtLanguageUrl);
         try {
             mtLanguageCodes = restTemplate.getForObject(mtLanguageUrl, List.class);
-            logger.info("Language codes received: " + mtLanguageCodes.toString());
-        } catch (ResourceNotAvailable e) {
+            logger.info("Language codes received: " + mtLanguageCodes);
+        } catch (ResourceAccessException e) {
             logger.error("Resource " + mtLanguageUrl + " is not available.");
         } catch (Exception e) {
-            logger.error(e.toString());
+            logger.error(e.getMessage());
         }
     }
 
@@ -54,6 +54,6 @@ public class LanguageServiceImpl implements MTService {
      */
     @Override
     public void run(String... args) {
-         getMTParameters();
+         updateMTParameters();
     }
 }

@@ -44,7 +44,7 @@ public class MTController {
         List<String> entities = new ArrayList<>();
         entities.addAll(languageService.getAllLanguageCodes());
 
-        logger.info("Successfully returning a list of language codes: " + entities.toString());
+        logger.info("Successfully returning a list of language codes: " + entities);
         return new ResponseEntity(entities, HttpStatus.OK);
     }
 
@@ -60,13 +60,13 @@ public class MTController {
         List<String> entities = new ArrayList<>();
         entities.addAll(domainService.getAllDomains());
 
-        logger.info("Successfully returning a list of domains: " + entities.toString());
+        logger.info("Successfully returning a list of domains: " + entities);
         return new ResponseEntity(entities, HttpStatus.OK);
     }
 
     @PostMapping("/translate")
     public ResponseEntity translate(@RequestBody TranslateDTO translateDTO) {
-        logger.info("Processing requested translation: " + translateDTO.toString());
+        logger.info("Processing requested translation: " + translateDTO);
         return new ResponseEntity(HttpStatus.PAYMENT_REQUIRED);
     }
 }
