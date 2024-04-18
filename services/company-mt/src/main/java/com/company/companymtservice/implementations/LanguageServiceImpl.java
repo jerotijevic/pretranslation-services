@@ -29,7 +29,6 @@ public class LanguageServiceImpl implements MTService {
     private String mtLanguageUrl;
 
     private Logger logger = LoggerFactory.getLogger(LanguageServiceImpl.class);
-    private final RestTemplate restTemplate = new RestTemplate();
 
     /**
      * Cron method to run on a predefined time set in Constants class.

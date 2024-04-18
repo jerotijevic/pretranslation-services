@@ -64,9 +64,18 @@ public class MTController {
         return new ResponseEntity(entities, HttpStatus.OK);
     }
 
+    /**
+     * A post method that translates provided content and is paid for regardless of success rate.
+     * @param translateDTO
+     * @return
+     */
     @PostMapping("/translate")
-    public ResponseEntity translate(@RequestBody TranslateDTO translateDTO) {
-        logger.info("Processing requested translation: " + translateDTO);
-        return new ResponseEntity(HttpStatus.PAYMENT_REQUIRED);
+    public ResponseEntity<String> translate(@RequestBody TranslateDTO translateDTO) {
+        logger.info("Processing requested for translation: " +
+                "\nSource language: " + translateDTO.getSource_language().getLanguageCode() +
+                "\nTarget language: " + translateDTO.getTarget_language().getLanguageCode() +
+                "\nDomain: " + translateDTO.getDomain().getDomain() +
+                "\nContent to translate: " + translateDTO.getContent());
+        return new ResponseEntity<String>("Received request for translation. Payment successfull.", HttpStatus.OK);
     }
 }

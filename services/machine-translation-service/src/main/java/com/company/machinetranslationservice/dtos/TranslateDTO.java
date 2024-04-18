@@ -6,15 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class TranslateDTO {
-    private Language sourceLanguage;
-    private Language targetLanguage;
-//    private Domain domain;
+    private Language source_language;
+    private Language target_language;
+    private Domain domain;
     private String content;
 
 }
