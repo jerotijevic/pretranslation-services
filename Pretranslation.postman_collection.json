@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "66990374-55a0-4eac-bf51-b86edfc564a6",
+		"name": "Pretranslation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1077783"
+	},
+	"item": [
+		{
+			"name": "getLanguages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/mt/languages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"mt",
+						"languages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDomains",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/mt/domains",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"mt",
+						"domains"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "translate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source_language\":\"en-US\",\r\n    \"target_language\":\"fr-FR\",\r\n    \"domain\":\"academic\",\r\n    \"content\":\"translate this text please\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/mt/translate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"mt",
+						"translate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validated-translate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source_language\":\"en-US\",\r\n    \"target_language\":\"fr-FR\",\r\n    \"domain\":\"academic\",\r\n    \"content\":\"translate this text please\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cmt/validated-translate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cmt",
+						"validated-translate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
