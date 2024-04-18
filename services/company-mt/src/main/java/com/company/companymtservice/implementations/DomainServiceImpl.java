@@ -29,7 +29,6 @@ public class DomainServiceImpl  implements MTService {
     private String mtDomainUrl;
 
     private Logger logger = LoggerFactory.getLogger(DomainServiceImpl.class);
-    private final RestTemplate restTemplate = new RestTemplate();
 
     /**
      * Cron method to run on a predefined time set in Constants class

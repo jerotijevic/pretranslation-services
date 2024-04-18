@@ -40,6 +40,6 @@ public class Constants {
     /**
      * Controller messages
      */
-    public static final String REQ_REC = "Received request for validation.";
-    public static final String REQ_VAL = "Request validated successfully. Sending to translation.";
+    public static final String REQ_RECEIVED = "Received request for validation.";
+    public static final String REQ_VALIDATED = "Request validated successfully. Sending to translation.";
 }
