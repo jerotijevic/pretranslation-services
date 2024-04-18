@@ -37,12 +37,12 @@ public class DomainServiceImpl  implements MTService {
     @Override
     @Scheduled(cron = Constants.CRON_DAILY_AT_MIDNIGHT)
     public void updateMTParameters() {
-        logger.info("Getting available domains from: " + mtDomainUrl);
+        logger.info(Constants.DOMAINS_GET + mtDomainUrl);
         try {
             mtDomains = restTemplate.getForObject(mtDomainUrl, List.class);
-            logger.info("Domains received: " + mtDomains);
+            logger.info(Constants.DOMAINS_REC + mtDomains);
         } catch (ResourceAccessException e) {
-            logger.error("Resource: " + mtDomainUrl + " is not available.");
+            logger.error(mtDomainUrl + Constants.NOT_AVAILABLE);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

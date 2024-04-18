@@ -35,9 +35,9 @@ public class ValidatorServiceImpl implements ValidatorService{
     }
 
     private void validateContent(String content) throws WordCountLimitExceededException, RequiredParameterException {
-        isParamEmpty("Content", content);
+        isParamEmpty(Constants.PARAM_CONTENT, content);
         if(getWordCount(content) > Constants.MAX_CONTENT_WORD_SIZE) {
-            throw new WordCountLimitExceededException("Maximum number of words exceeded.");
+            throw new WordCountLimitExceededException(Constants.VAL_MAX_WORD_MSG);
         }
     }
 
@@ -48,21 +48,21 @@ public class ValidatorServiceImpl implements ValidatorService{
 
     private void validateLanguages(Language sourceLanguage, Language targetLanguage)
             throws RequiredParameterException, LanguageNotAvailableException {
-        isParamEmpty("Source language", sourceLanguage);
-        isParamEmpty("Target language", targetLanguage);
+        isParamEmpty(Constants.PARAM_SOURCE_LANG, sourceLanguage);
+        isParamEmpty(Constants.PARAM_TARGET_LANG, targetLanguage);
         List<Language> languageCodeList = languageService.getMtLanguageCodes();
         if(!languageCodeList.contains(sourceLanguage.getLanguageCode())) {
-            throw new LanguageNotAvailableException("Source language is not supported at the moment.");
+            throw new LanguageNotAvailableException(Constants.PARAM_SOURCE_LANG + Constants.VAL_NOT_SUPPORTED);
         }
         if(!languageCodeList.contains(targetLanguage.getLanguageCode())) {
-            throw new LanguageNotAvailableException("Target language is not supported at the moment.");
+            throw new LanguageNotAvailableException(Constants.PARAM_TARGET_LANG + Constants.VAL_NOT_SUPPORTED);
         }
     }
 
     private void validateDomain(Domain domain) throws DomainNotAvailableException, RequiredParameterException {
-        isParamEmpty("Domain", domain);
+        isParamEmpty(Constants.PARAM_DOMAIN, domain);
         if(!domainService.getMtDomains().contains(domain.getDomain())) {
-            throw new DomainNotAvailableException("Selected domain is not supported at the moment.");
+            throw new DomainNotAvailableException(Constants.PARAM_DOMAIN + Constants.VAL_NOT_SUPPORTED);
         }
     }
 
@@ -70,7 +70,7 @@ public class ValidatorServiceImpl implements ValidatorService{
         if(domain != null) {
             isParamEmpty(paramName, domain.getDomain());
         } else {
-            throw new RequiredParameterException("Parameter " + paramName + " must be sent.");
+            throw new RequiredParameterException(paramName + Constants.VAL_SEND_PARAM);
         }
     }
 
@@ -78,13 +78,13 @@ public class ValidatorServiceImpl implements ValidatorService{
         if(language != null) {
             isParamEmpty(paramName, language.getLanguageCode());
         } else {
-            throw new RequiredParameterException("Parameter " + paramName + " must be sent.");
+            throw new RequiredParameterException(paramName + Constants.VAL_SEND_PARAM);
         }
     }
 
     private void isParamEmpty(String paramName, String param) throws RequiredParameterException {
         if(param == null || param.isEmpty()) {
-            throw new RequiredParameterException("Parameter " + paramName + " must be sent.");
+            throw new RequiredParameterException(paramName + Constants.VAL_SEND_PARAM);
         }
     }
 }
