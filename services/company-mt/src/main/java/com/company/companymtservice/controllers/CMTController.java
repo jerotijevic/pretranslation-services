@@ -1,5 +1,6 @@
 package com.company.companymtservice.controllers;
 
+import com.company.companymtservice.constants.Constants;
 import com.company.companymtservice.dtos.TranslationRequestDTO;
 import com.company.companymtservice.exceptions.DomainNotAvailableException;
 import com.company.companymtservice.exceptions.LanguageNotAvailableException;
@@ -32,12 +33,12 @@ public class CMTController {
 
     @PostMapping("/validated-translate")
     public ResponseEntity validatedTranslate(@RequestBody TranslationRequestDTO translationRequestDTO) {
-
+//TODO proveri da li je MT servis UP
         ResponseEntity responseEntity;
-        logger.info("Received request for validation.");
+        logger.info(Constants.REQ_REC);
         try {
             validatorService.validate(translationRequestDTO);
-            logger.info("Request validated successfully. Sending to translation.");
+            logger.info(Constants.REQ_VAL);
             responseEntity = new ResponseEntity(HttpStatus.OK);
         } catch (WordCountLimitExceededException | LanguageNotAvailableException |
                 DomainNotAvailableException | RequiredParameterException e) {

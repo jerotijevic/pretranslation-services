@@ -37,12 +37,12 @@ public class LanguageServiceImpl implements MTService {
     @Override
     @Scheduled(cron = Constants.CRON_DAILY_AT_MIDNIGHT)
     public void updateMTParameters() {
-        logger.info("Getting language code list from: " + mtLanguageUrl);
+        logger.info(Constants.LANG_CODES_GET + mtLanguageUrl);
         try {
             mtLanguageCodes = restTemplate.getForObject(mtLanguageUrl, List.class);
-            logger.info("Language codes received: " + mtLanguageCodes);
+            logger.info(Constants.LANG_CODES_REC + mtLanguageCodes);
         } catch (ResourceAccessException e) {
-            logger.error("Resource " + mtLanguageUrl + " is not available.");
+            logger.error(mtLanguageUrl + Constants.NOT_AVAILABLE);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
