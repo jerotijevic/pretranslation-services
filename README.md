@@ -92,8 +92,8 @@ In the project structure we can find the following (among other things):
 
 ## To production ready 
 
-* pass the code trough some linter services, SAST, DAST tools etc.
-  * Sonar qube, Zap scans, Burp scans, Coverity ... other 
+* pass the code trough some linter services, SAST, DAST tools etc. Sonar qube, Zap scans, Burp scans, Coverity ... other
+  * **DONE (sonar lint, sonar qube and default intelliJ linter)**
 * write unit and integration tests (not enough time for that now since "it is expected that **a maximum of a few hours** will be spent working on the project")
 * Dockerize the project
 * deploy to dev/test/int/pro integrating the service with other non mock ones
