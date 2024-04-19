@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +35,15 @@ public class LanguageServiceImpl implements MTService {
     @Override
     @Scheduled(cron = Constants.CRON_DAILY_AT_MIDNIGHT)
     public void updateMTParameters() {
-        logger.info(Constants.LANG_CODES_GET + mtLanguageUrl);
+        String infoGetLanguages = Constants.LANG_CODES_GET + mtLanguageUrl;
+        logger.info(infoGetLanguages);
         try {
             mtLanguageCodes = restTemplate.getForObject(mtLanguageUrl, List.class);
-            logger.info(Constants.LANG_CODES_REC + mtLanguageCodes);
+            String infoReceivedLanguages = Constants.LANG_CODES_REC + mtLanguageCodes;
+            logger.info(infoReceivedLanguages);
         } catch (ResourceAccessException e) {
-            logger.error(mtLanguageUrl + Constants.NOT_AVAILABLE);
+            String errorURLNotAvailable = mtLanguageUrl + Constants.NOT_AVAILABLE;
+            logger.error(errorURLNotAvailable);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -49,7 +51,7 @@ public class LanguageServiceImpl implements MTService {
 
     /**
      * Method to run on initialization in order to get all available language codes from Machine Translation Service
-     * @param args
+     * @param args String
      */
     @Override
     public void run(String... args) {

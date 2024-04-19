@@ -1,6 +1,8 @@
 package com.company.companymtservice.constants;
 
 public class Constants {
+
+    private Constants(){}
     /**
      * CRON constants
      */
