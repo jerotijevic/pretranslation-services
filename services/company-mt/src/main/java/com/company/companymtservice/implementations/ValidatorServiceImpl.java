@@ -51,26 +51,26 @@ public class ValidatorServiceImpl implements ValidatorService{
         isParamEmpty(Constants.PARAM_SOURCE_LANG, sourceLanguage);
         isParamEmpty(Constants.PARAM_TARGET_LANG, targetLanguage);
         List<Language> languageCodeList = languageService.getMtLanguageCodes();
-        if(!languageCodeList.contains(sourceLanguage.getLanguageCode())) {
+        if(!languageCodeList.toString().contains(sourceLanguage.getLanguageCode())) {
             throw new LanguageNotAvailableException(Constants.PARAM_SOURCE_LANG + Constants.VAL_NOT_SUPPORTED);
         }
-        if(!languageCodeList.contains(targetLanguage.getLanguageCode())) {
+        if(!languageCodeList.toString().contains(targetLanguage.getLanguageCode())) {
             throw new LanguageNotAvailableException(Constants.PARAM_TARGET_LANG + Constants.VAL_NOT_SUPPORTED);
         }
     }
 
     private void validateDomain(Domain domain) throws DomainNotAvailableException, RequiredParameterException {
-        isParamEmpty(Constants.PARAM_DOMAIN, domain);
-        if(!domainService.getMtDomains().contains(domain.getDomain())) {
+        isParamEmpty(domain);
+        if(!domainService.getMtDomains().toString().contains(domain.getDomainName())) {
             throw new DomainNotAvailableException(Constants.PARAM_DOMAIN + Constants.VAL_NOT_SUPPORTED);
         }
     }
 
-    private void isParamEmpty(String paramName, Domain domain) throws RequiredParameterException {
+    private void isParamEmpty(Domain domain) throws RequiredParameterException {
         if(domain != null) {
-            isParamEmpty(paramName, domain.getDomain());
+            isParamEmpty(Constants.PARAM_DOMAIN, domain.getDomainName());
         } else {
-            throw new RequiredParameterException(paramName + Constants.VAL_SEND_PARAM);
+            throw new RequiredParameterException(Constants.PARAM_DOMAIN + Constants.VAL_SEND_PARAM);
         }
     }
 

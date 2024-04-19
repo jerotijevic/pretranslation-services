@@ -41,11 +41,10 @@ public class MTController {
     public ResponseEntity<List<String>> getLanguageCodes() {
 
         logger.info("Getting all the language codes.");
-        List<String> entities = new ArrayList<>();
-        entities.addAll(languageService.getAllLanguageCodes());
+        List<String> entities = new ArrayList<>(languageService.getAllLanguageCodes());
 
         logger.info("Successfully returning a list of language codes: " + entities);
-        return new ResponseEntity(entities, HttpStatus.OK);
+        return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
     /**
@@ -54,28 +53,27 @@ public class MTController {
      * @return a list of the supported content domains
      */
     @GetMapping("/domains")
-    public ResponseEntity getDomains() {
+    public ResponseEntity<List<String>> getDomains() {
 
         logger.info("Getting all the domains.");
-        List<String> entities = new ArrayList<>();
-        entities.addAll(domainService.getAllDomains());
+        List<String> entities = new ArrayList<>(domainService.getAllDomains());
 
         logger.info("Successfully returning a list of domains: " + entities);
-        return new ResponseEntity(entities, HttpStatus.OK);
+        return new ResponseEntity<>(entities, HttpStatus.OK);
     }
 
     /**
      * A post method that translates provided content and is paid for regardless of success rate.
-     * @param translateDTO
-     * @return
+     * @param translateDTO - A DTO object that is received with parameters for translation
+     * @return ResponseEntity
      */
     @PostMapping("/translate")
     public ResponseEntity<String> translate(@RequestBody TranslateDTO translateDTO) {
         logger.info("Processing requested for translation: " +
                 "\nSource language: " + translateDTO.getSource_language().getLanguageCode() +
                 "\nTarget language: " + translateDTO.getTarget_language().getLanguageCode() +
-                "\nDomain: " + translateDTO.getDomain().getDomain() +
+                "\nDomain: " + translateDTO.getDomain().getDomainName() +
                 "\nContent to translate: " + translateDTO.getContent());
-        return new ResponseEntity<String>("Received request for translation. Payment successfull.", HttpStatus.OK);
+        return new ResponseEntity<>("Received request for translation. Payment successful.", HttpStatus.OK);
     }
 }
