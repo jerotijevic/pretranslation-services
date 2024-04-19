@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.ConnectException;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @RestController
@@ -45,7 +43,7 @@ public class CMTController {
 
 
     @PostMapping("/validated-translate")
-    public ResponseEntity validatedTranslate(@RequestBody TranslationRequestDTO translationRequestDTO) {
+    public ResponseEntity<String> validatedTranslate(@RequestBody TranslationRequestDTO translationRequestDTO) {
         ResponseEntity<String> responseEntity;
         ResponseEntity<String> mtResponseEntity;
         logger.info(Constants.REQ_RECEIVED);
@@ -61,7 +59,7 @@ public class CMTController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<TranslationRequestDTO> requestHttpEntity = new HttpEntity<TranslationRequestDTO>(translationRequestDTO, headers);
+        HttpEntity<TranslationRequestDTO> requestHttpEntity = new HttpEntity<>(translationRequestDTO, headers);
         try {
             mtResponseEntity = restTemplate.postForEntity(mtTranslateUrl, requestHttpEntity, String.class);
 

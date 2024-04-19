@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class TranslationRequestDTO {
     private Language source_language;   //not in camel case because that's how it is stated in the assignment
-    private Language target_language;
+    private Language target_language;   //not in camel case because that's how it is stated in the assignment
     private Domain domain;
     private String content;
 }
