@@ -25,6 +25,14 @@ public class ValidatorServiceImpl implements ValidatorService{
     @Autowired
     DomainServiceImpl domainService;
 
+    /**
+     * Entry method used for validation of parameters sent for translation.
+     * @param translationRequestDTO - DTO object with parameters.
+     * @throws WordCountLimitExceededException - Exception for when the maximum word limit is exceeded.
+     * @throws LanguageNotAvailableException - Exception for when the selected language is not available.
+     * @throws DomainNotAvailableException - Exception for when the selected domain is not available.
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     @Override
     public void validate(TranslationRequestDTO translationRequestDTO)
             throws WordCountLimitExceededException, LanguageNotAvailableException,
@@ -34,6 +42,12 @@ public class ValidatorServiceImpl implements ValidatorService{
         validateDomain(translationRequestDTO.getDomain());
     }
 
+    /**
+     * Method for validating Content parameter.
+     * @param content - The content to be validated
+     * @throws WordCountLimitExceededException - Exception for when the maximum word limit is exceeded.
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     private void validateContent(String content) throws WordCountLimitExceededException, RequiredParameterException {
         isParamEmpty(Constants.PARAM_CONTENT, content);
         if(getWordCount(content) > Constants.MAX_CONTENT_WORD_SIZE) {
@@ -41,11 +55,23 @@ public class ValidatorServiceImpl implements ValidatorService{
         }
     }
 
+    /**
+     * Helper method to get the word count.
+     * @param content - String with words.
+     * @return - Number of words in content.
+     */
     private int getWordCount(String content) {
         String[] contentWords = content.trim().split("\\s+");
         return contentWords.length;
     }
 
+    /**
+     * Method for validating Language parameters.
+     * @param sourceLanguage - Source language parameter to be checked.
+     * @param targetLanguage - Target language parameter to be checked.
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     * @throws LanguageNotAvailableException - Exception for when the selected language is not available.
+     */
     private void validateLanguages(Language sourceLanguage, Language targetLanguage)
             throws RequiredParameterException, LanguageNotAvailableException {
         isParamEmpty(Constants.PARAM_SOURCE_LANG, sourceLanguage);
@@ -59,6 +85,12 @@ public class ValidatorServiceImpl implements ValidatorService{
         }
     }
 
+    /**
+     * Method for validating Domain parameter.
+     * @param domain - parameter to be validated.
+     * @throws DomainNotAvailableException - Exception for when the selected domain is not available.
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     private void validateDomain(Domain domain) throws DomainNotAvailableException, RequiredParameterException {
         isParamEmpty(domain);
         if(!domainService.getMtDomains().toString().contains(domain.getDomainName())) {
@@ -66,6 +98,11 @@ public class ValidatorServiceImpl implements ValidatorService{
         }
     }
 
+    /**
+     * Helper method for checking if the Domain param is null or empty.
+     * @param domain - param to be checked.
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     private void isParamEmpty(Domain domain) throws RequiredParameterException {
         if(domain != null) {
             isParamEmpty(Constants.PARAM_DOMAIN, domain.getDomainName());
@@ -74,6 +111,12 @@ public class ValidatorServiceImpl implements ValidatorService{
         }
     }
 
+    /**
+     * Helper method for checking if the Language param is null or empty.
+     * @param paramName - Source or Target.
+     * @param language - param to be checked
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     private void isParamEmpty(String paramName, Language language) throws RequiredParameterException {
         if(language != null) {
             isParamEmpty(paramName, language.getLanguageCode());
@@ -82,6 +125,12 @@ public class ValidatorServiceImpl implements ValidatorService{
         }
     }
 
+    /**
+     * Helper method for checking if the param is null or empty.
+     * @param paramName - name of parameter to be checked.
+     * @param param - param to be checked
+     * @throws RequiredParameterException - Exception for when there is a missing parameter.
+     */
     private void isParamEmpty(String paramName, String param) throws RequiredParameterException {
         if(param == null || param.isEmpty()) {
             throw new RequiredParameterException(paramName + Constants.VAL_SEND_PARAM);

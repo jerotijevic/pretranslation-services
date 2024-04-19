@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Data Transfer Object with parameters that need to be validated before being forwarded for translation
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

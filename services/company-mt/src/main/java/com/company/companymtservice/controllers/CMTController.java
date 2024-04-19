@@ -41,7 +41,11 @@ public class CMTController {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-
+    /**
+     * A post method that validates translation parameters and if passed forwards them for translation to MTService
+     * @param translationRequestDTO - A DTO object that is received with parameters for translation validation
+     * @return ResponseEntity object
+     */
     @PostMapping("/validated-translate")
     public ResponseEntity<String> validatedTranslate(@RequestBody TranslationRequestDTO translationRequestDTO) {
         ResponseEntity<String> responseEntity;
