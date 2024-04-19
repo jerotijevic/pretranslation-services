@@ -1,0 +1,16 @@
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\CompanyMTServiceApplication.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\services\ValidatorService.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\entities\Language.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\exceptions\DomainNotAvailableException.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\implementations\ValidatorServiceImpl.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\constants\Constants.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\exceptions\WordCountLimitExceededException.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\entities\Domain.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\services\MTService.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\implementations\LanguageServiceImpl.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\exceptions\ResourceNotAvailableException.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\exceptions\SourceLanguageNotAvailableException.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\dtos\TranslationRequestDTO.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\controllers\CMTController.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\exceptions\TargetLanguageNotAvailableException.java
+C:\Users\jjovan\Downloads\TP\git\pretranslation-services\services\company-mt\src\main\java\com\company\companymtservice\implementations\DomainServiceImpl.java
